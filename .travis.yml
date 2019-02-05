@@ -4,7 +4,7 @@ branches:
   - master
   - prod
 script:
-- zip -r ./build.zip .
+- zip -r -x *.git* ./build.zip .
 before_deploy:
 - git config --local user.name "Fokir"
 - git config --local user.email "sokol300@inbox.ru"
