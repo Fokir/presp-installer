@@ -18,7 +18,7 @@ if hash docker 2>/dev/null; then
 else
     echo "Docker start install"
     sudo curl -sSL https://get.docker.com | sudo sh
-    sudo apt-get install python-pip
+    sudo apt-get install python-pip -y
     sudo pip install docker-compose
 fi
 
