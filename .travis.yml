@@ -1,0 +1,24 @@
+language: bash
+branches:
+  only:
+  - master
+  - prod
+script:
+- zip -r ./build.zip .
+before_deploy:
+- git config --local user.name "Fokir"
+- git config --local user.email "sokol300@inbox.ru"
+- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+- git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: THGxraSiKvwvVdenUGGLvDLm+QzV1s/rRjtFXb5XO0fJgHTRUccLhPyXowwlwNSvlu/pULdEupqVNWl0eneF/Y4g1SaM3evQlJWcjUJurbetJ8oqBrvZZHCJB9l0UXlzPNwBuBO8am3eBwY3G+DQYtmCDR43skgn+GmW3wmW2VarGBN1jOYsFeXvrYtTouefWvd0jI4vqYWV6W/CfSR+jwgbiN300HC6TkKKY3SN7fxaSqZl7S3D+1p3Ensr4cS0RUN44cLirQirlHwQthT1w2txkz7zMM45Mv8299162lsSgqudU8Izle6tm0vhUeiQEs5+RVXaZRRsFr+gvKgUsI/MJk+agnlzkaWQ7HLXDwwyWr7099oJXLR0leI+G3DqtsOoct2zKdohWES8WFYEBAfueNVK8/eU5rPz2i2lkfAiknz2Yy8OT2Ml0cI+0am/HEsQqSAExguXuRthHJg67cjDkM7Mdo7sBv+s2eXvOq3fMDIeksKQ1lvNk4oy+/PivvJE1Yzh6G+Plge+QMCsQ1ZF89/6Vd8N5VOAecigeHTccsS9k7HcetXlkUXwCgcJv3tjjTWXiGg7FLamf7NA+PF2GEhLEKohiZi8geukdMOu4BeICN2o0kOpCMSsVukgEFkQrZSAifaAONQiDPAttYwBCX/JaNpe4Th7CXLgsiY=
+  file: "./build.zip"
+  on:
+    repo: Fokir/presp-installer
+notifications:
+  email:
+    on_failure: always
+    on_success: change
