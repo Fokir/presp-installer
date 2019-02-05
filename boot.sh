@@ -1,6 +1,9 @@
 #!/bin/bash
-echo "Dowload frontend release"
+echo "Update system components"
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
+echo "Dowload frontend release"
 curl http://89.223.31.207:5000/frontend/latest/download > ./frontend.zip
 unzip ./frontend.zip -d ./frontend
 rm ./frontend.zip
@@ -15,6 +18,8 @@ if hash docker 2>/dev/null; then
 else
     echo "Docker start install"
     sudo curl -sSL https://get.docker.com | sudo sh
+    sudo apt-get install python-pip
+    sudo pip install docker-compose
 fi
 
 docker-compose up --build -d
