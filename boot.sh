@@ -19,7 +19,8 @@ else
     echo "Docker start install"
     sudo curl -sSL https://get.docker.com | sudo sh
     sudo apt-get install python-pip -y
+    sudo pip install --upgrade setuptools
     sudo pip install docker-compose
 fi
 
-docker-compose up --build -d
+sudo docker-compose up --build -d
