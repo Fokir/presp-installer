@@ -39,10 +39,12 @@ sudo apt-get install libnss-mdns -y
 sudo cp ./nsswitch.conf /etc/nsswitch.conf
 
 echo "Install nodejs"
-sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | sudo bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+source ~/.bashrc
 
 sudo nvm install 10.15.1
 sudo nvm use 10.15.1
+sudo npm install npm@latest -g
 
 echo "Install pm2"
 npm i -g pm2
